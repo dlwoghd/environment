@@ -4,7 +4,7 @@ server {
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
-        root /opt/services/backend/;
+        root ${WORKING_DIR};
     }
     location /media/ {
         alias /opt/services/media/;

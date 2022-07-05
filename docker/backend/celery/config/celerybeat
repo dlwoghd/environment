@@ -8,7 +8,7 @@ CELERY_APP="config"
 #CELERY_APP="proj.tasks:app"
 
 # Where to chdir at start.
-CELERYD_CHDIR="/opt/services/backend/"
+CELERYD_CHDIR="${WORKING_DIR}"
 
 # Extra arguments to celerybeat
 CELERYBEAT_OPTS="--schedule=/opt/services/log/celery/celerybeat-schedule"

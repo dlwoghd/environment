@@ -3,16 +3,16 @@ services:
     build: .
     environment:
       APP_ENV: DEV
-      WORKING_DIR: /opt/services/backend
+      WORKING_DIR: /opt/services/app
       MYSQL_ROOT_PASSWORD: ${MASTER_DB_PASSWORD}
       MYSQL_DATABASE: ${MASTER_DB_NAME}
       DB_CHECK_INTERVER: ${DB_CHECK_INTERVER}
       DB_CHECK_COUNT: ${DB_CHECK_COUNT}
       DJANGO_CELERY: ${DJANGO_CELERY}
     user: "root:root"
-    working_dir: /opt/services/backend
+    working_dir: /opt/services/app
     volumes:
-      - ../../backend:/opt/services/backend:cached
+      - ../../backend:/opt/services/app:cached
       - ../../logs/backend-app:/opt/services/log:cached
       - ../../media:/opt/services/media
       - ./localhost.backend.kr:/etc/nginx/sites-available/localhost.backend.kr
