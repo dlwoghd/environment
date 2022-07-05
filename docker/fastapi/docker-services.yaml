@@ -8,7 +8,6 @@ services:
         MYSQL_DATABASE: ${MASTER_DB_NAME}
         DB_CHECK_INTERVER: ${DB_CHECK_INTERVER}
         DB_CHECK_COUNT: ${DB_CHECK_COUNT}
-        DJANGO_CELERY: ${DJANGO_CELERY}
     user: "root:root"
     working_dir: /opt/services/app
     volumes:
