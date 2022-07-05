@@ -34,6 +34,22 @@ services:
     networks:
       container_net:
         ipv4_address: ${SUBNET}.10
+  api-app:
+    environment:
+      DATABASE_IP: ${SUBNET}.20
+    extends:
+      file: docker/fastapi/docker-services.yaml
+      service: api-app
+    container_name: api-app
+    depends_on:
+      - master-db
+      - redis
+    ports:
+      - "${FAST_API_HTTP_PORT}:80"
+      - "${FAST_API_HTTPS_PORT}:443"
+    networks:
+      container_net:
+        ipv4_address: ${SUBNET}.11
 networks:
   container_net:
     driver: bridge

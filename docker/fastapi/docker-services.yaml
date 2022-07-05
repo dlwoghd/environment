@@ -1,0 +1,20 @@
+services:
+  api-app:
+    build: .
+    environment:
+        APP_ENV: DEV
+        WORKING_DIR: /opt/services/app
+        MYSQL_ROOT_PASSWORD: ${MASTER_DB_PASSWORD}
+        MYSQL_DATABASE: ${MASTER_DB_NAME}
+        DB_CHECK_INTERVER: ${DB_CHECK_INTERVER}
+        DB_CHECK_COUNT: ${DB_CHECK_COUNT}
+        DJANGO_CELERY: ${DJANGO_CELERY}
+    user: "root:root"
+    working_dir: /opt/services/app
+    volumes:
+      - ../../api:/opt/services/app:cached
+      - ../../logs/api-app:/opt/services/log:cached
+      - ../../media:/opt/services/media
+      - ./local.nginx.setting:/etc/nginx/sites-available/local.nginx.setting
+      - ./start.sh:/opt/services/start.sh
+    command: /bin/bash -c "/opt/services/start.sh"
