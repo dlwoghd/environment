@@ -15,6 +15,6 @@ services:
       - ../../backend:/opt/services/app:cached
       - ../../logs/backend-app:/opt/services/log:cached
       - ../../media:/opt/services/media
-      - ./localhost.backend.kr:/etc/nginx/sites-available/localhost.backend.kr
+      - ./local.nginx.setting:/etc/nginx/sites-available/local.nginx.setting
       - ./start.sh:/opt/services/start.sh
     command: /bin/bash -c "/opt/services/start.sh"

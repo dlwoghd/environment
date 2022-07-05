@@ -23,7 +23,7 @@ RUN echo "alias python=python3.10" >> /root/.bashrc
 ADD start.sh ./
 RUN chmod 700 start.sh
 
-COPY ./localhost.backend.kr /etc/nginx/sites-available/
+COPY ./local.nginx.setting /etc/nginx/sites-available/
 
 COPY ./celery/config/celeryd /etc/default/
 COPY ./celery/config/celerybeat /etc/default/
@@ -32,4 +32,4 @@ COPY ./celery/exec/celerybeat /etc/init.d/
 COPY ./requirements.txt ${WORKING_DIR}/
 
 RUN pip install -r ${WORKING_DIR}/requirements.txt
-RUN /bin/bash -c "ln -s /etc/nginx/sites-available/localhost.backend.kr /etc/nginx/sites-enabled/localhost.backend.kr"
+RUN /bin/bash -c "ln -s /etc/nginx/sites-available/local.nginx.setting /etc/nginx/sites-enabled/local.nginx.setting"
