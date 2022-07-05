@@ -1,0 +1,10 @@
+services:
+  master-db:
+    image: mysql:8.0.29
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MASTER_DB_PASSWORD}
+      - MYSQL_DATABASE=${MASTER_DB_NAME}
+    volumes:
+      - ../../data:/data/
+      - ../../logs/mysql:/var/log/mysql
+      - ./mysql.cnf:/etc/mysql/conf.d/mysql.cnf

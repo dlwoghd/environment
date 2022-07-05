@@ -1,0 +1,44 @@
+version: '3.8'
+services:
+  master-db:
+    extends:
+      file: docker/mysql/docker-services.yaml
+      service: master-db
+    container_name: master-db
+    ports:
+      - "${MASTER_DB_PORT}:3306"
+    networks:
+      container_net:
+        ipv4_address: ${SUBNET}.20
+  redis:
+    container_name: redis
+    image: redis:6.2.5
+    ports:
+      - "${REDIS_PORT}:6379"
+    networks:
+      container_net:
+        ipv4_address: ${SUBNET}.30
+  backend-app:
+    environment:
+      DATABASE_IP: ${SUBNET}.20
+    extends:
+      file: docker/backend/docker-services.yaml
+      service: backend-app
+    container_name: backend-app
+    depends_on:
+      - master-db
+      - redis
+    ports:
+      - "${DJANGO_HTTP_PORT}:80"
+      - "${DJANGO_HTTPS_PORT}:443"
+    networks:
+      container_net:
+        ipv4_address: ${SUBNET}.10
+networks:
+  container_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: ${SUBNET}.0/24
+          gateway: ${SUBNET}.1

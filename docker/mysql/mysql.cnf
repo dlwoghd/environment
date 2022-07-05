@@ -1,0 +1,24 @@
+[client]
+default-character-set=utf8mb4
+
+
+[mysqld]
+user=mysql
+datadir=/data/
+default-storage-engine=InnoDB
+innodb_buffer_pool_size = 4G
+innodb_log_buffer_size = 256M
+innodb_log_file_size = 1G
+skip-external-locking
+skip-name-resolve
+max_connections = 1024
+innodb_flush_log_at_trx_commit = 0
+innodb_flush_method = O_DIRECT
+
+
+
+[mysqldump]
+default-character-set = utf8mb4
+
+[mysql]
+default-character-set = utf8mb4
