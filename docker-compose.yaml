@@ -21,6 +21,7 @@ services:
   backend-app:
     environment:
       DATABASE_IP: ${SUBNET}.20
+      REDIS_IP: ${SUBNET}.30
     extends:
       file: docker/django/docker-services.yaml
       service: backend-app
@@ -37,6 +38,7 @@ services:
   api-app:
     environment:
       DATABASE_IP: ${SUBNET}.20
+      REDIS_IP: ${SUBNET}.30
     extends:
       file: docker/fastapi/docker-services.yaml
       service: api-app
