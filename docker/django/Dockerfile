@@ -14,10 +14,7 @@ RUN apt update \
   && apt install -qq -y tzdata \
   && apt install -qq -y vim curl \
   && apt install -qq -y nginx mysql-client \
-  && apt install -qq -y python3.10 pip celery python3-django-celery-beat\
-  && apt-get clean autoclean \
-  && apt-get autoremove -y \
-  && rm -rf /var/lib/{apt,dpkg,cache,log}
+  && apt install -qq -y python3.10 pip
 
 RUN echo "alias python=python3.10" >> /root/.bashrc
 ADD start.sh ./
@@ -32,4 +29,10 @@ COPY ./celery/exec/celerybeat /etc/init.d/
 COPY ./requirements.txt ${WORKING_DIR}/
 
 RUN pip install -r ${WORKING_DIR}/requirements.txt
+
+RUN apt install -qq -y celery python3-django-celery-beat \
+  && apt-get clean autoclean \
+  && apt-get autoremove -y \
+  && rm -rf /var/lib/{apt,dpkg,cache,log}
+
 RUN /bin/bash -c "ln -s /etc/nginx/sites-available/local.nginx.setting /etc/nginx/sites-enabled/local.nginx.setting"
