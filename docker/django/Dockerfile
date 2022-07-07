@@ -35,4 +35,6 @@ RUN apt install -qq -y celery python3-django-celery-beat \
   && apt-get autoremove -y \
   && rm -rf /var/lib/{apt,dpkg,cache,log}
 
+RUN rm - rf /etc/nginx/sites-enabled/default
+
 RUN /bin/bash -c "ln -s /etc/nginx/sites-available/local.nginx.setting /etc/nginx/sites-enabled/local.nginx.setting"

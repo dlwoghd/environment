@@ -1,11 +1,14 @@
 server {
-    listen 80;
-    server_name localhost;
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    server_name _;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
         root /opt/services/app;
     }
+
     location /media/ {
         alias /opt/services/media/;
         add_header Cache-Control "public";
@@ -30,3 +33,42 @@ server {
         proxy_pass http://unix:/var/run/connection.sock;
     }
 }
+
+# server {
+#     listen 443 default_server;
+#     listen [::]:443 default_server;
+#
+#     server_name {domain 입력};
+#
+#     ssl     on;
+#     ssl_certificate {crt 입력};
+#     ssl_certificate_key {key 입력};
+#
+#
+#     location = /favicon.ico { access_log off; log_not_found off; }
+#     location /static/ {
+#         root /opt/services/backend/;
+#     }
+#     location /media/ {
+# alias /opt/services/media/;
+# add_header Cache-Control "public";
+#         expires modified +24h;
+#         autoindex on;
+#     }
+#     location / {
+#         if ($http_origin = ''){
+#             set $http_origin "*";
+#         }
+#
+#         proxy_hide_header Access-Control-Allow-Origin;
+#         add_header Access-Control-Allow-Origin $http_origin;
+#
+# 	    client_max_body_size 10M;
+#         include proxy_params;
+#         proxy_connect_timeout       1800s;
+#         proxy_send_timeout          1800s;
+#         proxy_read_timeout          1800s;
+#         send_timeout                1800s;
+#         proxy_pass http://unix:/var/run/connection.sock;
+#     }
+# }
