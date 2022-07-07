@@ -1,6 +1,8 @@
 services:
   master-db:
     image: mysql:8.0.29
+    cap_add:
+      - SYS_NICE
     environment:
       - MYSQL_ROOT_PASSWORD=${MASTER_DB_PASSWORD}
       - MYSQL_DATABASE=${MASTER_DB_NAME}
