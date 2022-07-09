@@ -17,7 +17,7 @@ CELERY_APP="config"
 #CELERY_APP="proj.tasks:app"
 
 # Where to chdir at start.
-CELERYD_CHDIR="/opt/services/${WORKING_DIR}/"
+CELERYD_CHDIR="${WORKING_DIR}"
 
 # Extra command-line arguments to the worker
 CELERYD_OPTS="--concurrency=2 --time-limit=18000"

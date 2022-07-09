@@ -33,5 +33,5 @@ ADD start.sh ./
 RUN chmod 700 start.sh
 
 COPY ./local.nginx.setting /etc/nginx/sites-available/
-RUN rm - rf /etc/nginx/sites-enabled/default
+RUN rm -rf /etc/nginx/sites-enabled/default
 RUN /bin/bash -c "ln -s /etc/nginx/sites-available/local.nginx.setting /etc/nginx/sites-enabled/local.nginx.setting"
